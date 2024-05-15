@@ -1,0 +1,32 @@
+{
+	"name": "server",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"start": "node dist/index.js",
+		"build": "tsc",
+		"dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@9.1.1+sha256.9551e803dcb7a1839fdf5416153a844060c7bce013218ce823410532504ac10b",
+	"dependencies": {
+		"@types/bcryptjs": "^2.4.6",
+		"@types/cookie-parser": "^1.4.7",
+		"@types/cors": "^2.8.17",
+		"@types/express": "^4.17.21",
+		"@types/mongodb": "^4.0.7",
+		"@types/mongoose": "^5.11.97",
+		"@types/node": "^20.12.11",
+		"bcryptjs": "^2.4.3",
+		"cookie-parser": "^1.4.6",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"mongodb": "^6.6.1",
+		"mongoose": "^8.3.4",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.4.5"
+	}
+}
