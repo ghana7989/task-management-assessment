@@ -32,7 +32,20 @@ const TaskItem: React.FC<TaskItemProps> = ({
 				onChange={(value) => {
 					if (typeof value === 'string') handleStatusChange(value)
 				}}
-				data={['To Do', 'In Progress', 'Done']}
+				data={[
+					{
+						label: 'To Do',
+						value: 'todo',
+					},
+					{
+						label: 'In Progress',
+						value: 'in-progress',
+					},
+					{
+						label: 'Done',
+						value: 'done',
+					},
+				]}
 			/>
 			<Group justify='apart' style={{ marginTop: 10 }}>
 				<ActionIcon bg='red'>

@@ -14,7 +14,7 @@ import useAuth from '../hooks/useAuth'
 const Signup: React.FC = () => {
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
-	const { login, user } = useAuth() // Assuming login function also handles signup
+	const { register, user } = useAuth() // Assuming login function also handles signup
 	const navigate = useNavigate()
 	useEffect(() => {
 		if (user) {
@@ -23,7 +23,7 @@ const Signup: React.FC = () => {
 	}, [user])
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
-		login(email, password) // In a real scenario, replace this with a signup function
+		register(email, password) // In a real scenario, replace this with a signup function
 		navigate('/dashboard') // Redirect to dashboard after signup
 	}
 

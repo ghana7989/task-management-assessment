@@ -13,9 +13,19 @@ const app: Application = express()
 const PORT: number | string = process.env.PORT || 3000
 
 connectDB()
-app.use(cors())
+app.use(
+	cors({
+		origin: 'http://localhost:5173',
+		methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+		credentials: true,
+		preflightContinue: true,
+	})
+)
 app.use(express.json())
 app.use(cookieParser())
+
+// Handle preflight requests
+app.options('*', cors())
 
 app.use('/api/auth', authRoutes)
 app.use(protect)

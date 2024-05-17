@@ -1,39 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Title, Divider, Space, Button } from '@mantine/core'
+import { Button, Container, Divider, Space, Title } from '@mantine/core'
+import React, { useEffect, useState } from 'react'
+import FilterDropdown from '../components/FilterDropDown'
 import TaskForm from '../components/TaskForm'
 import TaskList from '../components/TaskList'
-import { Task } from '../types'
-import FilterDropdown from '../components/FilterDropDown'
 import useAuth from '../hooks/useAuth'
+import useTaskManager from '../hooks/useTaskManager'
+import { Task } from '../types'
 
 const Dashboard: React.FC = () => {
-	const [tasks, setTasks] = useState<Task[]>([
-		{
-			id: '1',
-			title: 'Example Task 1',
-			description: 'Description here',
-			status: 'To Do',
-		},
-		{
-			id: '2',
-			title: 'Example Task 2',
-			description: 'Description here',
-			status: 'In Progress',
-		},
-	])
 	const { logout } = useAuth()
+	const { fetchTasks, tasks, createTask, deleteTask, updateTask } =
+		useTaskManager()
+	console.log('🚀 ------------------🚀')
+	console.log('🚀 ~ tasks:', tasks)
+	console.log('🚀 ------------------🚀')
 
 	const [filter, setFilter] = useState<string>('All')
 	// Load tasks from local storage on component mount
 	useEffect(() => {
-		const loadTasks = () => {
-			const savedTasks = localStorage.getItem('tasks')
-			if (savedTasks) {
-				setTasks(JSON.parse(savedTasks))
-			}
-		}
-
-		loadTasks()
+		fetchTasks()
 	}, [])
 
 	// Save tasks to local storage on tasks array change
@@ -42,21 +27,15 @@ const Dashboard: React.FC = () => {
 	}, [tasks])
 
 	const handleAddTask = (newTask: Task) => {
-		setTasks([...tasks, newTask])
-		// Add task to backend or storage
+		createTask(newTask)
 	}
 
 	const handleUpdateTask = (updatedTask: Task) => {
-		const updatedTasks = tasks.map((task) =>
-			task.id === updatedTask.id ? updatedTask : task
-		)
-		setTasks(updatedTasks)
-		// Update task in backend or storage
+		updateTask(updatedTask.id, updatedTask)
 	}
 
 	const handleDeleteTask = (taskId: string) => {
-		setTasks(tasks.filter((task) => task.id !== taskId))
-		// Delete task from backend or storage
+		deleteTask(taskId)
 	}
 
 	const filteredTasks =
@@ -71,7 +50,7 @@ const Dashboard: React.FC = () => {
 			<FilterDropdown value={filter} onChange={setFilter} />
 			<Space h='md' />
 			<TaskList
-				tasks={filteredTasks}
+				tasks={filteredTasks as Task[]}
 				onUpdateTask={handleUpdateTask}
 				onDeleteTask={handleDeleteTask}
 			/>

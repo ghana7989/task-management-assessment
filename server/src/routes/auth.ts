@@ -25,7 +25,7 @@ router.post('/register', async (req: Request, res: Response) => {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
 		})
-		res.status(201).json({ message: 'User registered successfully' })
+		res.status(201).json(user)
 	} catch (error: any) {
 		res
 			.status(500)
@@ -44,10 +44,11 @@ router.post('/login', async (req: Request, res: Response) => {
 		}
 
 		res.cookie('userId', user._id, {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === 'production',
+			httpOnly: false,
+			secure: false,
+			// secure: process.env.NODE_ENV === 'production',
 		})
-		res.status(200).json({ message: 'User logged in successfully' })
+		res.status(200).json(user)
 	} catch (error: any) {
 		res.status(500).json({ message: 'Error logging in', error: error.message })
 	}

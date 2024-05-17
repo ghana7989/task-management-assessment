@@ -14,7 +14,24 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({ value, onChange }) => {
 			onChange={(val) => {
 				if (typeof val === 'string') onChange(val)
 			}}
-			data={['All', 'To Do', 'In Progress', 'Done']}
+			data={[
+				{
+					label: 'All',
+					value: 'All',
+				},
+				{
+					label: 'To Do',
+					value: 'todo',
+				},
+				{
+					label: 'In Progress',
+					value: 'in-progress',
+				},
+				{
+					label: 'Done',
+					value: 'done',
+				},
+			]}
 		/>
 	)
 }

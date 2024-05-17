@@ -51,7 +51,20 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
 					onChange={(value) => {
 						if (typeof value === 'string') setStatus(value)
 					}}
-					data={['To Do', 'In Progress', 'Done']}
+					data={[
+						{
+							label: 'To Do',
+							value: 'todo',
+						},
+						{
+							label: 'In Progress',
+							value: 'in-progress',
+						},
+						{
+							label: 'Done',
+							value: 'done',
+						},
+					]}
 				/>
 				<Group justify='right' mt='md'>
 					<Button type='submit'>Add Task</Button>
